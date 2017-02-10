@@ -1,0 +1,34 @@
+{
+  "name": "spring-boosterpack-web",
+  "description": "usual configuration for Spring Boot webapp (war) faster, easier.",
+  "main": "N/A",
+  "authors": [
+    "furplag"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "java",
+    "spring-boot",
+    "web"
+  ],
+  "homepage": "https://github.com/furplag/spring-boosterpack-web",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "bootstrap-3x": "bootstrap#^3",
+    "bootstrap": "bootstrap#^4",
+    "jquery-1x": "jquery#^1",
+    "jquery-2x": "jquery#^2",
+    "jquery": "^3.1.1",
+    "tether": "^1.4.0",
+    "modernizr-2x": "modernizr#^2",
+    "modernizr": "^3.3.1"
+  }
+}
