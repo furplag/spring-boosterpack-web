@@ -12,7 +12,7 @@ More easier to i18n support.
 #### Usage
 ```WebMvcConfiguration.java
 @Configuration
-public class WebMvcConfiguration extends jp.furplag.spring.boot.starter.webstarter.config.WebMvcConfigurerAdapter {
+public class WebMvcConfiguration extends jp.furplag.spring.booster.web.config.WebMvcConfigurerAdapter {
   // Add LocaleChangeInterceptor.
   // Enable to use i18n validation messages.
   ...
@@ -27,7 +27,7 @@ public class WebMvcConfiguration extends jp.furplag.spring.boot.starter.webstart
 ```WebSecurityConfiguration.java
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfiguration extends jp.furplag.spring.boot.starter.webstarter.config.WebSecurityConfiguration {
+public class WebSecurityConfiguration extends jp.furplag.spring.booster.web.config.WebSecurityConfiguration {
   // Add CsrfHeaderFilter.
   // Regist Static resource path to IgnoredRequestConfigurer.
   ...
@@ -38,8 +38,8 @@ public class WebSecurityConfiguration extends jp.furplag.spring.boot.starter.web
 #### Usage
 ```SomeController.java
   @GetMapping("/")
-  public String index(Classified classified) {
-    logger.info(ToStringBuilder.reflectionToString(classified, ToStringStyle.MULTI_LINE_STYLE));
+  public String index(Wootheed wootheed) {
+    logger.info(ToStringBuilder.reflectionToString(wootheed, ToStringStyle.MULTI_LINE_STYLE));
     ...
   }
 ```

@@ -126,7 +126,7 @@
         <artifactId>license-maven-plugin</artifactId>
         <version>3.0</version>
         <configuration>
-          <header>src/header.txt</header>
+          <header>.licenseHeader</header>
           <properties>
             <owner>furplag</owner>
             <contact>https://github.com/furplag/</contact>
@@ -178,8 +178,7 @@
           <repositoryOwner>furplag</repositoryOwner>
         </configuration>
         <executions>
-          <!-- run site-maven-plugin's 'site' target as part of the build's
-            normal 'deploy' phase -->
+          <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
           <execution>
             <goals>
               <goal>site</goal>

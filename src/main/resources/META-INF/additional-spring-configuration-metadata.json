@@ -1,0 +1,71 @@
+{
+  "groups": [],
+  "properties": [
+    {
+      "name": "webstarter.mvc.locale-change-http-methods",
+      "type": "java.util.List<java.lang.String>",
+      "description": "The HTTP method(s) over which the locale can be changed.",
+      "defaultValue": "\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\""
+    },
+    {
+      "name": "webstarter.mvc.locale-change-ignore-invalid",
+      "type": "java.lang.Boolean",
+      "description": "Whether to ignore an invalid value for the locale parameter.",
+      "defaultValue": true
+    },
+    {
+      "name": "webstarter.mvc.locale-change-param-name",
+      "type": "java.lang.String",
+      "description": "The name of the parameter that contains a locale specification in a locale change request.",
+      "defaultValue": "locale"
+    },
+    {
+      "name": "webstarter.mvc.validation-message-prefix",
+      "type": "java.lang.String",
+      "description": "message resource key prefix ( e.g. \"validation.\" ) .",
+      "defaultValue": "\"\""
+    },
+    {
+      "name": "webstarter.security.login-url",
+      "type": "java.lang.String",
+      "description": "The URL to send users to if login is required.",
+      "defaultValue": "/login"
+    },
+    {
+      "name": "webstarter.security.login-success-url",
+      "type": "java.lang.String",
+      "description": "Specifies where users will go after authenticating successfully if they have not visited a secured page prior to authenticating.",
+      "defaultValue": "/"
+    },
+    {
+      "name": "webstarter.security.login-failure-url",
+      "type": "java.lang.String",
+      "description": "The URL to send users if authentication fails.",
+      "defaultValue": "/login?error"
+    },
+    {
+      "name": "webstarter.security.logout-url",
+      "type": "java.lang.String",
+      "description": "The URL that triggers log out to occur.",
+      "defaultValue": "/logout"
+    },
+    {
+      "name": "webstarter.security.logout-success-url",
+      "type": "java.lang.String",
+      "description": "The URL to redirect to after logout has occurred.",
+      "defaultValue": "/"
+    },
+    {
+      "name": "webstarter.security.timeout-url",
+      "type": "java.lang.String",
+      "description": "The URL to redirect to send users if session timeout.",
+      "defaultValue": "/login?timeout"
+    },
+    {
+      "name": "webstarter.security.ignored",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Comma-separated list of paths to exclude from the default secured paths.",
+      "defaultValue": "\"webstarter.security.login-url\",\n\"webstarter.security.login-failure-url\",\n\"webstarter.security.logout-url\",\n\"webstarter.security.timeout-url\""
+    }
+  ]
+}
