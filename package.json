@@ -1,0 +1,35 @@
+{
+  "name": "spring-boosterpack-web",
+  "version": "1.4.3-SNAPSHOT",
+  "description": "usual configuration for Spring Boot webapp (war) faster, easier.",
+  "main": "N/A",
+  "scripts": {
+    "uglify-modernizr": "uglifyjs --compress warnings=false --mangle --comments '/^!/' --output src/main/resources/static/boosterpack/libs/js/modernizr.min.js bower_components/modernizr/dist/modernizr-build.js",
+    "uglify-modernizr-2x": "uglifyjs --compress warnings=false --mangle --comments '/^!/' --output src/main/resources/static/boosterpack/libs/js/modernizr-2x.min.js bower_components/modernizr-2x/modernizr.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/furplag/spring-boosterpack-web.git"
+  },
+  "keywords": [
+    "java",
+    "spring-boot",
+    "web"
+  ],
+  "author": "furplag",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/furplag/spring-boosterpack-web/issues"
+  },
+  "homepage": "https://github.com/furplag/spring-boosterpack-web#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-bower-install-simple": "^1.2.3",
+    "grunt-bowercopy": "^1.2.4",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-exec": "^1.0.1",
+    "load-grunt-tasks": "^3.5.2",
+    "time-grunt": "^1.4.0",
+    "uglify-js": "^2.7.5"
+  }
+}
