@@ -1,6 +1,6 @@
 # spring-boosterpack-web
 
-
+[![codebeat badge](https://codebeat.co/badges/ea9689ba-9e37-460b-9eb1-ea07fe70db09)](https://codebeat.co/projects/github-com-furplag-spring-boosterpack-web)
 
 usual configuration for [Spring Boot](https://github.com/spring-projects/spring-boot) webapp (war) faster, easier.
 
