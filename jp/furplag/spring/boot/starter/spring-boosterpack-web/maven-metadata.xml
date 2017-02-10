@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>jp.furplag.spring.boot.starter</groupId>
+  <artifactId>spring-boosterpack-web</artifactId>
+  <versioning>
+    <versions>
+      <version>1.4.3-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20170210100546</lastUpdated>
+  </versioning>
+</metadata>

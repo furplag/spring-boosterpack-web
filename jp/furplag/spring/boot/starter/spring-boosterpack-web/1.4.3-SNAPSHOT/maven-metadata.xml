@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>jp.furplag.spring.boot.starter</groupId>
+  <artifactId>spring-boosterpack-web</artifactId>
+  <version>1.4.3-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20170210.100546</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20170210100546</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.4.3-20170210.100546-1</value>
+        <updated>20170210100546</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.4.3-20170210.100546-1</value>
+        <updated>20170210100546</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
