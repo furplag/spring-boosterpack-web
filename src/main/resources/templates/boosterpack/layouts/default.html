@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--[if IE]><html class="no-js lte-ie9"><![endif]-->
+<!--[if !IE]><!-->
+<html class="no-js"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  th:with="lang=${#locale.language},site=${@environment.getProperty('server.display-name')?:@environment.getProperty('server.context-path')?:'app'}"
+  th:lang="${lang}">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9" />
+<!--[if lt IE 9]>
+  <meta http-equiv="refresh" th:attr="content=|0; URL=@{/error/nosupport}|" />
+<![endif]-->
+<noscript>
+  <meta http-equiv="refresh" th:attr="content=|0; URL=@{/error/noscript}|" />
+</noscript>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=1" />
+<meta layout:fragment="meta" th:remove="tag" />
+<title layout:title-pattern="$DECORATOR_TITLE $CONTENT_TITLE" th:text="${#strings.toUpperCase(site)}"></title>
+<!--[if IE]>
+<script th:src="@{/webjars/modernizr/modernizr.min.js}"></script>
+<![endif]-->
+<!--[if !IE]><!-->
+<script th:src="@{/boosterpack/libs/js/modernizr.min.js}"></script>
+<!--<![endif]-->
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/boosterpack/libs/css/bootstrap-no-flexbox.min.css}" />
+<link rel="stylesheet" th:href="@{/boosterpack/libs/css/bootstrap-square.min.css}" />
+<link rel="stylesheet" th:href="@{/webjars/font-awesome/css/font-awesome.min.css}" />
+<link rel="stylesheet" th:href="@{/boosterpack/libs/css/animate.min.css}" />
+<link rel="stylesheet" th:href="@{/boosterpack/css/font-awesome-boosterpack.css}" />
+<link rel="stylesheet" th:href="@{/boosterpack/css/boosterpack.css}" />
+<link rel="stylesheet" th:href="@{|/css/${site}.css|}" />
+<link layout:fragment="style" th:remove="tag" />
+</head>
+<body>
+  <main>
+<!--/*
+  <nav role="navigation" class="bg-faded">
+    <div class="breadcrumb bg-faded" th:with="breadcrumbs=${#strings.listSplit('prev ious page', ' ')}">
+      <a th:if="${!vs.last}" href="#" class="breadcrumb-item" th:each="breadcrumb,vs : ${breadcrumbs}"><span th:text="${breadcrumb}"></span><span class="small" th:text="| (${vs.index+1} of ${#lists.size(breadcrumbs)})|"></span></a>
+      <div th:if="${vs.last}" class="breadcrumb-item" th:each="breadcrumb,vs : ${breadcrumbs}">
+        <span th:text="${breadcrumb}"></span><span class="small" th:text="| (${vs.index+1} of ${#lists.size(breadcrumbs)})|"></span>
+      </div>
+    </div>
+  </nav>
+ */-->
+  <div class="container-fluid">
+    <div class="row">
+      <div id="mainContent" class="col-12 col-xs-12 content">
+        <div layout:fragment="content" th:remove="tag"></div>
+      </div>
+    </div>
+  </div>
+  </main>
+  <header th:include="boosterpack/fragments/ui/header::default" th:remove="tag"></header>
+  <footer th:include="boosterpack/fragments/ui/footer::default" th:remove="tag"></footer>
+  <div class="modal fade lefty" id="menu" tabindex="-1">
+    <div class="modal-dialog modal-sm" style="overflow-y: auto; animation-duration: .25s;">
+      <div class="modal-content" style="overflow-y: auto;">
+        <div class="modal-body list-group bg-info" th:with="size=30">
+          <th:block th:each="v : ${#numbers.sequence(1,size)}">
+            <a href="#" class="list-group-item" th:text="|Menu ${v} of ${size}|"></a>
+          </th:block>
+          <a href="#" class="list-group-item list-group-item-action">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum fugiat voluptatem necessitatibus adipisci optio corporis facilis labore laudantium ducimus perferendis. <i id="end">hey</i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade righten" id="me" tabindex="-1">
+    <div class="modal-dialog modal-sm" style="overflow-y: auto; animation-duration: .25s;">
+      <div class="modal-content" style="overflow-y: auto;">
+        <div class="modal-body bg-info">
+          <div th:include="boosterpack/fragments/ui/me::default" th:remove="tag"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="invisible outer-world">
+<!--[if IE]>
+    <script th:src="@{/boosterpack/libs/js/jquery-2x.min.js}"></script>
+<![endif]-->
+<!--[if !IE]><!-->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!--<![endif]-->
+    <script th:src="@{/webjars/tether/tether.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap-notify/bootstrap-notify.min.js}"></script>
+    <script th:src="@{/boosterpack/js/boosterpack.js}"></script>
+    <div th:include="boosterpack/fragments/script/resuscitator::default" th:remove="tag" th:if="${@environment.getProperty('boosterpack.web.security.session-resuscitate')}"></div>
+    <div layout:fragment="script" th:remove="tag"></div>
+    <div th:include="boosterpack/fragments/script/notification::default" th:remove="tag" th:if="*{notificationMessage?:'' != ''}"></div>
+  </aside>
+</body>
+</html>

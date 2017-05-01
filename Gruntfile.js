@@ -53,33 +53,14 @@ module.exports = function (grunt) {
           destPrefix: 'src/main/resources/static/boosterpack/libs'
         },
         files: {
-          'css/bootstrap.css': 'bootstrap/dist/css/bootstrap.css',
-          'css/bootstrap.css.map': 'bootstrap/dist/css/bootstrap.css.map',
-          'css/bootstrap.min.css': 'bootstrap/dist/css/bootstrap.min.css',
-          'css/bootstrap.min.css.map': 'bootstrap/dist/css/bootstrap.min.css.map',
-          'js/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
-          'js/bootstrap.min.js': 'bootstrap/dist/js/bootstrap.min.js',
+          'css/animate.min.css': 'animate.css/animate.min.css',
 
-          'css/bootstrap-3x.css': 'bootstrap-3x/dist/css/bootstrap.css',
-          'css/bootstrap-3x.css.map': 'bootstrap-3x/dist/css/bootstrap.css.map',
           'css/bootstrap-3x.min.css': 'bootstrap-3x/dist/css/bootstrap.min.css',
           'css/bootstrap-3x.min.css.map': 'bootstrap-3x/dist/css/bootstrap.min.css.map',
-          'js/bootstrap-3x.js': 'bootstrap-3x/dist/js/bootstrap.js',
           'js/bootstrap-3x.min.js': 'bootstrap-3x/dist/js/bootstrap.min.js',
 
-          'js/jquery.js': 'jquery/dist/jquery.js',
-          'js/jquery.min.js': 'jquery/dist/jquery.min.js',
-
-          'js/jquery-1x.js': 'jquery-1x/dist/jquery.js',
           'js/jquery-1x.min.js': 'jquery-1x/dist/jquery.min.js',
-
-          'js/jquery-2x.js': 'jquery-2x/dist/jquery.js',
           'js/jquery-2x.min.js': 'jquery-2x/dist/jquery.min.js',
-
-          'js/tether.js': 'tether/dist/js/tether.js',
-          'js/tether.min.js': 'tether/dist/js/tether.min.js',
-
-          'js/modernizr.js': 'modernizr/dist/modernizr-build.js',
 
           'js/modernizr-2x.js': 'modernizr-2x/modernizr.js'
         }
@@ -88,9 +69,6 @@ module.exports = function (grunt) {
     exec: {
       'uglify-modernizr': {
         command: 'npm run uglify-modernizr'
-      },
-      'uglify-modernizr-2x': {
-        command: 'npm run uglify-modernizr-2x'
       }
     }
   });
@@ -100,7 +78,7 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   // Full distribution task.
-  grunt.registerTask('dist', ['bower-install-simple:dist', 'bowercopy:dist', 'exec:uglify-modernizr', 'exec:uglify-modernizr-2x'])
+  grunt.registerTask('dist', ['bower-install-simple:dist', 'bowercopy:dist', 'exec:uglify-modernizr'])
 
   // Default task.
   grunt.registerTask('default', ['dist'])

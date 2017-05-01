@@ -1,0 +1,34 @@
+<!doctype html>
+<html class="no-js"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  lang="en">
+<head></head>
+<body>
+<section th:fragment="default">
+  <footer class="bg-fade">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col text-center">
+          <div th:text="|${@environment.getProperty('project.name')?:'App'}-${@environment.getProperty('project.version')?:'Unknown'}|"></div>
+          <div th:text="|Spring Boot version: ${@environment.getProperty('spring.boot.starter.version')?:'Unknown'}|"></div>
+          <div th:text="|Session life time: ${(#httpSession.maxInactiveInterval?:0)?: 'nope'}|" th:if="${!session.isEmpty()}"></div>
+        </div>
+        <div class="col-12 text-right" th:if="${@environment.getProperty('webstarter.mvc.woothee-enabled')?:false}">
+          <button type="button" class="btn btn-secondary icon os browser" th:classAppend="|fa fa-${ua.os}|"></button>
+          <button type="button" class="btn btn-secondary icon browser" th:classAppend="|fa fa-${ua.ie ? 'internet-explorer' : ua.name}|" style="position: relative;"><span style="position: absolute; bottom: 2px; right: 2px; font-size: .65rem; text-align: right;" th:text="${#numbers.formatInteger(ua.versionNumber, 1)}"></span></button>
+          <button type="button" class="btn btn-secondary icon device">
+            <span class="hidden-sm-up visible-xs-inline-block">XS</span>
+            <span class="hidden-xs-down hidden-md-up visible-sm-inline-block">S</span>
+            <span class="hidden-sm-down hidden-lg-up visible-md-inline-block">M</span>
+            <span class="hidden-md-down hidden-xl-up visible-lg-inline-block">L</span>
+            <span class="hidden-lg-down visible-xl" th:if="${!ua.ie}">XL</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+</body>
+</html>

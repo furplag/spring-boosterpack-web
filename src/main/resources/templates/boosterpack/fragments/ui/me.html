@@ -1,0 +1,43 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  th:lang="${lang}">
+<head></head>
+<body>
+
+<section th:fragment="default">
+  <p sec:authorize="isAuthenticated()"
+    th:text="|Sign in as ${#authentication.name}|"></p>
+  <div class="list-group">
+    <a th:href="@{/me/settings/}" class="list-group-item" th:text="${#messages.msgOrNull('me.settings.index')?:'Setting'}"></a>
+    <a href="/" class="list-group-item"
+      sec:authorize="isAnonymous()"
+      th:href="@{${@environment.getProperty('boosterpack.web.security.login-url')?:'/login'}}"
+      th:text="${#messages.msgOrNull('login')?:'Sign in'}"></a>
+    <a href="/" class="list-group-item"
+      sec:authorize="isAnonymous()"
+      th:href="@{${@environment.getProperty('boosterpack.web.security.signup-url')?:'/regist'}}"
+      th:text="${#messages.msgOrNull('signup')?:'Sign up'}"></a>
+    <form th:action="@{/logout}" method="POST" id="signout" class="invisible outer-world"></form>
+    <a href="#" class="list-group-item" th:attr="data-signout=${true}"
+      sec:authorize="isAuthenticated()"
+      th:text="${#messages.msgOrNull('page.title.logout')?:'Sign out'}"></a>
+  </div>
+    <a href="#" data-toggle="collapse" data-target="#locales"
+      th:text="|${#messages.msgOrNull('ui.languages')?:'Change locale'}|"></a>
+    <div class="collapse" id="locales">
+      <th:block th:each="language : ${#strings.arraySplit('en_US,en_GB,ja_JP', ',')}">
+        <a class="btn btn-secondary btn-sm"
+          th:classAppend="${(#locale.toString() == language) ? 'active' : ''}"
+          th:href="|${#httpServletRequest.requestURI}?locale=${language}|"
+          th:text="|${language}|"></a>
+      </th:block>
+    </div>
+  <div class="text-right"
+    sec:authorize="isAuthenticated()"
+    th:text="|logged in @${#dates.format(new java.util.Date(#httpSession.creationTime), 'HH:mm:ss')}|"></div>
+</section>
+
+</body>
+</html>

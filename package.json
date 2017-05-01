@@ -1,34 +1,52 @@
 {
   "name": "spring-boosterpack-web",
-  "version": "1.4.3-SNAPSHOT",
+  "version": "1.5.1-SNAPSHOT",
   "description": "usual configuration for Spring Boot webapp (war) faster, easier.",
-  "main": "N/A",
-  "scripts": {
-    "uglify-modernizr": "uglifyjs --compress warnings=false --mangle --comments '/^!/' --output src/main/resources/static/boosterpack/libs/js/modernizr.min.js bower_components/modernizr/dist/modernizr-build.js",
-    "uglify-modernizr-2x": "uglifyjs --compress warnings=false --mangle --comments '/^!/' --output src/main/resources/static/boosterpack/libs/js/modernizr-2x.min.js bower_components/modernizr-2x/modernizr.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/furplag/spring-boosterpack-web.git"
-  },
   "keywords": [
+    "bootstrap",
     "java",
-    "spring-boot",
+    "spring-boot-starter",
     "web"
   ],
+  "homepage": "https://github.com/furplag/spring-boosterpack-web#readme",
   "author": "furplag",
-  "license": "Apache-2.0",
+  "scripts": {
+    "uglify-modernizr": "uglifyjs --compress warnings=false --mangle --comments '/^!/' --output src/main/resources/static/boosterpack/libs/js/modernizr.min.js bower_components/modernizr/dist/modernizr-build.js"
+  },
+  "style": "src/main/resources/static/css/boosterpack.css",
+  "sass": "scss/boosterpack.scss",
+  "main": "src/main/resources/static/js/boosterpack",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/furplag/spring-boosterpack-web.git"
+  },
   "bugs": {
     "url": "https://github.com/furplag/spring-boosterpack-web/issues"
   },
-  "homepage": "https://github.com/furplag/spring-boosterpack-web#readme",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "jquery": ">=1.9.1",
+    "tether": "^1.4.0"
+  },
   "devDependencies": {
+    "autoprefixer": "^6.6.1",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-es2015-modules-strip": "^0.1.0",
+    "babel-preset-es2015": "^6.18.0",
+    "clean-css": "^3.4.23",
+    "eslint": "^3.12.2",
     "grunt": "^1.0.1",
-    "grunt-bower-install-simple": "^1.2.3",
-    "grunt-bowercopy": "^1.2.4",
+    "grunt-babel": "^6.0.0",
+    "grunt-build-control": "^0.7.1",
     "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-exec": "^1.0.1",
+    "htmlhint": "^0.9.13",
     "load-grunt-tasks": "^3.5.2",
+    "node-sass": "^4.1.1",
+    "postcss-cli": "^2.6.0",
+    "postcss-flexbugs-fixes": "^2.1.0",
     "time-grunt": "^1.4.0",
     "uglify-js": "^2.7.5"
   }

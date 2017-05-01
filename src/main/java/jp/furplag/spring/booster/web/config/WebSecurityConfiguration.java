@@ -29,10 +29,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -42,31 +43,40 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.AccessDeniedHandlerImpl;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.csrf.MissingCsrfTokenException;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import jp.furplag.spring.booster.web.security.authentication.GentlyLogoutSuccessHandler;
 import jp.furplag.spring.booster.web.security.authentication.SessionizedLoginUrlAuthenticationEntryPoint;
+import jp.furplag.spring.booster.web.security.filter.CsrfHeaderFilter;
 import jp.furplag.util.commons.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
 
-@ConfigurationProperties("webstarter.security")
+@ConfigurationProperties("boosterpack.web.security")
 public abstract class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  private final Log log = LogFactory.getLog(WebSecurityConfigurerAdapter.class);
+  private final Logger logger = LoggerFactory.getLogger(WebSecurityConfigurerAdapter.class);
 
   @Getter
   @Setter
-  private String loginUrl;
+  private Boolean gatewayEnabled = true;
 
   @Getter
   @Setter
-  private String loginSuccessUrl;
+  protected String loginUrl;
 
   @Getter
   @Setter
   private String loginFailureUrl;
+
+  @Getter
+  @Setter
+  private String loginSuccessUrl;
 
   @Getter
   @Setter
@@ -82,31 +92,25 @@ public abstract class WebSecurityConfiguration extends WebSecurityConfigurerAdap
 
   @Getter
   @Setter
-  private List<String> ignored = new ArrayList<>();
+  private List<String> allowedAnonymous = new ArrayList<>();
 
   @PostConstruct
   public void init() {
-    loginUrl = StringUtils.defaultString(loginUrl, "/login");
-    if (StringUtils.isBlank(loginSuccessUrl)) {
-      loginSuccessUrl = "/";
-    }
-    if (StringUtils.isBlank(loginFailureUrl)) {
-      loginFailureUrl = loginUrl + (loginUrl.contains("?") ? "&" : "?") + "error";
-    }
-    if (StringUtils.isBlank(logoutUrl)) {
-      logoutUrl = loginUrl + (loginUrl.contains("?") ? "&" : "?") + "logout";
-    }
-    if (StringUtils.isBlank(logoutSuccessUrl)) {
-      logoutSuccessUrl = "/";
-    }
-    if (StringUtils.isBlank(timeoutUrl)) {
-      timeoutUrl = loginUrl + (loginUrl.contains("?") ? "&" : "?") + "timeout";
-    }
-    if (ignored == null) ignored = new ArrayList<>();
-    ignored.addAll(Arrays.asList(loginUrl, loginFailureUrl, logoutSuccessUrl, timeoutUrl));
-    ignored = ignored.stream().sorted(Comparator.naturalOrder()).distinct().collect(Collectors.toList());
+    if (allowedAnonymous == null) allowedAnonymous = new ArrayList<>();
 
-    log.debug(ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE));
+    loginUrl = StringUtils.defaultIfBlank(loginUrl, "/login");
+    loginFailureUrl = StringUtils.defaultIfBlank(loginFailureUrl, "/error/unauthorized");
+    loginSuccessUrl = StringUtils.defaultIfBlank(loginSuccessUrl, "/dashboard");
+    logoutUrl = StringUtils.defaultIfBlank(logoutUrl, "/logout");
+    logoutSuccessUrl = StringUtils.defaultIfBlank(logoutSuccessUrl, "/quit");
+    timeoutUrl = StringUtils.defaultIfBlank(timeoutUrl, "/error/timeout");
+    gatewayEnabled = gatewayEnabled == null || gatewayEnabled;
+
+    if (gatewayEnabled) allowedAnonymous.addAll(Arrays.asList("/", "/index"));
+    allowedAnonymous.addAll(Arrays.asList(loginUrl, loginFailureUrl, logoutUrl, logoutSuccessUrl, timeoutUrl, "/error/**", "/resuscitate"));
+    allowedAnonymous = allowedAnonymous.stream().sorted(Comparator.naturalOrder()).distinct().collect(Collectors.toList());
+
+    logger.debug("  Boosterpack\n-----\n{}-----", ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE));
   }
 
   @Bean
@@ -119,6 +123,18 @@ public abstract class WebSecurityConfiguration extends WebSecurityConfigurerAdap
     return new SessionizedLoginUrlAuthenticationEntryPoint(loginUrl);
   }
 
+  @Bean
+  public LogoutSuccessHandler gentlyLogoutSuccessHandler() {
+    GentlyLogoutSuccessHandler gentlyLogoutSuccessHandler = new GentlyLogoutSuccessHandler();
+
+    return gentlyLogoutSuccessHandler;
+  }
+
+  /**
+   *
+   *
+   * @return {@link AccessDeniedHandler}
+   */
   @Bean
   protected AccessDeniedHandler accessDeniedHandler() {
     return new AccessDeniedHandler() {
@@ -134,22 +150,74 @@ public abstract class WebSecurityConfiguration extends WebSecurityConfigurerAdap
     };
   }
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-  }
-
-  @Override
-  public void configure(WebSecurity web) throws Exception {
-    // @formatter:off
-    web.ignoring().antMatchers("/favicon.ico", "/css/**", "/js/**", "/img/**", "/libs/**", "/boosterpack/**")
-    ;
-    // @formatter:on
-  }
-
+  /**
+   * Inject XSRF-TOKEN to HttpHeader.
+   *
+   * @return {@link CsrfTokenRepository}
+   */
+  @Bean
   protected CsrfTokenRepository csrfTokenRepository() {
     HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
     repository.setHeaderName("X-XSRF-TOKEN");
 
     return repository;
+  }
+
+  /**
+   * Override this method to configure the {@link HttpSecurity}. Typically subclasses
+   * should not invoke this method by calling super as it may override their
+   * configuration. The default configuration is:
+   *
+   * <pre>
+   * http.authorizeRequests().anyRequest().authenticated().and().formLogin().and().httpBasic();
+   * </pre>
+   *
+   * @param http the {@link HttpSecurity} to modify
+   * @throws Exception if an error occurs
+   */
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    // @formatter:off
+    http
+    .authorizeRequests()
+        .antMatchers(allowedAnonymous.toArray(new String[]{})).permitAll()
+        .anyRequest().authenticated()
+      .and().formLogin()
+        .loginPage(getLoginUrl()).permitAll()
+        .loginProcessingUrl(getLoginUrl()).permitAll()
+        .failureUrl(getLoginFailureUrl()).permitAll()
+        .defaultSuccessUrl(getLoginSuccessUrl()).permitAll()
+      .and().rememberMe()
+      .and().logout()
+        .logoutRequestMatcher(new AntPathRequestMatcher(getLogoutUrl(), HttpMethod.POST.toString()))
+        .logoutSuccessHandler(gentlyLogoutSuccessHandler())
+        .deleteCookies("JSESSIONID", "jsessionid")
+        .invalidateHttpSession(true).permitAll()
+      .and().sessionManagement()
+        .maximumSessions(-1).expiredUrl(getTimeoutUrl())
+        .and().sessionFixation().newSession()
+      .and().csrf()
+        .ignoringAntMatchers(allowedAnonymous.toArray(new String[]{}))
+        .csrfTokenRepository(csrfTokenRepository())
+      .and().exceptionHandling()
+        .authenticationEntryPoint(authenticationEntryPoint())
+        .accessDeniedHandler(accessDeniedHandler())
+      .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+    ;
+    // @formatter:on
+  }
+
+  /**
+   * {@inheritDoc}
+   * <p>
+   * Provides to access static resources before authentication. The default configuration is:
+   * <pre>favicon, /css, /js, /img, /webjars/**, and /boosterpack/**.</pre>
+   * </p>
+   */
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    // @formatter:off
+    web.ignoring().antMatchers("/favicon.ico", "/css/**", "/js/**", "/img/**", "/libs/**", "/webjars/**", "/boosterpack/**");
+    // @formatter:on
   }
 }

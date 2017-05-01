@@ -1,0 +1,32 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  lang="en">
+<head></head>
+<body>
+
+<section th:fragment="default">
+  <header class="fixed-top bg-info">
+    <nav class="navbar navbar-light container-fluid">
+      <div class="row no-gutters align-items-center">
+        <div class="col-3">
+          <button type="button" class="btn btn-info pull-xs-right toggler" data-toggle="modal" data-target="#menu">
+            <i></i>
+          </button>
+        </div>
+        <div class="col-6 text-center">
+          <a th:href="@{/}" class="h2 display-5" th:text="${#strings.capitalize(site)}">Sitename Here.</a>
+        </div>
+        <div class="col-3 text-right">
+          <button type="button" class="btn btn-info pull-xs-right toggler" data-toggle="modal" data-target="#me">
+            <i></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+</section>
+
+</body>
+</html>

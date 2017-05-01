@@ -1,0 +1,270 @@
+@charset "utf-8";
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+header, footer {
+  flex: 0 0 auto;
+  background-color: #efefef;
+}
+footer {padding-bottom: 1rem;}
+
+html.no-flexbox header,
+html.no-flexbox footer {
+  display: table;
+  width: 100%;
+}
+
+
+html.no-flexbox {
+  min-height: 100%;
+}
+html.no-flexbox body {
+  min-height: 100%;
+}
+
+html.no-flexbox header.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+}
+
+html.no-flexbox header .navbar {
+  min-height: auto;
+  margin-bottom: 0;
+}
+
+html.no-flexbox .breadcrumb .breadcrumb-item {
+  display: inline-block;
+}
+
+html.no-flexbox footer p {
+  margin-bottom: 0;
+  padding-bottom: 10px;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+html.no-flexbox main {
+  min-height: 100%;
+}
+
+.toggler,
+.icon {
+  width: 2rem;
+  height: 2rem;
+  padding: 4px;
+  outline: none;
+}
+
+.icon.viewport {
+  font-weight: 900;
+}
+
+.toggler i,
+.toggler:before,
+.toggler:after {
+  display: block;
+  transition: .15s all linear;
+  border: solid 2px #efefef;
+  border-radius: 1px;
+}
+.toggler i {
+  margin: 4px auto;
+  width: 100%;
+}
+.toggler:before,
+.toggler:after {
+  content: '';
+}
+
+.toggler.open i {
+  margin: auto;
+  width: 0;
+}
+.toggler.open:before {
+  transform: translateY(4px) rotate(-405deg);
+}
+.toggler.open:after {
+  transform: translateY(-4px) rotate(405deg);
+}
+.modal.fade.lefty .modal-dialog {
+  margin-right: auto;
+  margin-left: 0;
+}
+.modal.fade.righten .modal-dialog {
+  margin-right: 0;
+  margin-left: auto;
+}
+.modal.fade modal-dialog {
+  animation-duration: .25s;
+}
+
+.modal-body.list-group {
+  margin-bottom: 0;
+}
+
+header a,
+footer a {
+  text-decoration: none;
+}
+
+.btn-firefox:hover {
+  color: #e66000;
+}
+/*
+input[type="radio"].flat,
+input[type="checkbox"].flat {
+  opacity: .5;
+}
+input[type="checkbox"].flat ~ .ui-element {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin: 0 1px 1px 1px;
+  padding: 0;
+  background: #fff;
+  border: solid .125rem #222;
+  transition: all .1s ease-in;
+}
+
+input[type="checkbox"].flat:checked ~ .ui-element {
+  border-style: double;
+  border-width: .5rem;
+}
+
+input[type="checkbox"].flat.round {
+  opacity: .5;
+  outline: 0;
+}
+input[type="checkbox"].flat.round ~ .ui-element {
+  border-radius: 100%;
+  transform: scale(.9999);
+}
+
+input[type="radio"].flat ~ .ui-element {
+  position: relative;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: -.75rem;
+  margin-right: .25rem;
+  background-color: #fff;
+  border: solid .125rem #222;
+  cursor: pointer;
+  opacity: .5;
+}
+
+input[type="radio"].flat ~ .ui-element:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-top: .375rem;
+  margin-left: .375rem;
+  background-color: #222;
+  transition: all .1s linear;
+}
+
+input[type="radio"].flat:hover, ~ .ui-element {
+  border-color: #f00;
+}
+
+input[type="radio"].flat:checked ~ .ui-element:before {
+  width: .5rem;
+  height: .5rem;
+  margin-top: .125rem;
+  margin-left: .125rem;
+}
+ */
+@media (min-width: 1px) {
+  input[type="radio"].flat, input[type="radio"].switch,
+  input[type="checkbox"].flat,
+  input[type="checkbox"].switch {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  input[type="radio"].flat ~ .ui-element, input[type="radio"].switch ~ .ui-element,
+  input[type="checkbox"].flat ~ .ui-element,
+  input[type="checkbox"].switch ~ .ui-element {
+    position: relative;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-left: -0.75rem;
+    margin-right: 0.25rem;
+    background-color: #fff;
+    border: solid 0.125rem #292b2c;
+    cursor: pointer;
+  }
+  input[type="radio"].flat ~ .ui-element:before, input[type="radio"].switch ~ .ui-element:before,
+  input[type="checkbox"].flat ~ .ui-element:before,
+  input[type="checkbox"].switch ~ .ui-element:before {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-top: 0.375rem;
+    margin-left: 0.375rem;
+    background-color: #292b2c;
+    content: '';
+    -webkit-transition: all .1s linear;
+    -o-transition: all .1s linear;
+    transition: all .1s linear;
+  }
+  input[type="radio"].flat:hover:disabled ~ .ui-element, input[type="radio"].flat:hover.disabled ~ .ui-element, input[type="radio"].flat:focus:disabled ~ .ui-element, input[type="radio"].flat:focus.disabled ~ .ui-element, input[type="radio"].switch:hover:disabled ~ .ui-element, input[type="radio"].switch:hover.disabled ~ .ui-element, input[type="radio"].switch:focus:disabled ~ .ui-element, input[type="radio"].switch:focus.disabled ~ .ui-element,
+  input[type="checkbox"].flat:hover:disabled ~ .ui-element,
+  input[type="checkbox"].flat:hover.disabled ~ .ui-element,
+  input[type="checkbox"].flat:focus:disabled ~ .ui-element,
+  input[type="checkbox"].flat:focus.disabled ~ .ui-element,
+  input[type="checkbox"].switch:hover:disabled ~ .ui-element,
+  input[type="checkbox"].switch:hover.disabled ~ .ui-element,
+  input[type="checkbox"].switch:focus:disabled ~ .ui-element,
+  input[type="checkbox"].switch:focus.disabled ~ .ui-element {
+    border-color: #292b2c;
+    cursor: not-allowed;
+  }
+  input[type="radio"].flat:hover ~ .ui-element, input[type="radio"].flat:focus ~ .ui-element, input[type="radio"].switch:hover ~ .ui-element, input[type="radio"].switch:focus ~ .ui-element,
+  input[type="checkbox"].flat:hover ~ .ui-element,
+  input[type="checkbox"].flat:focus ~ .ui-element,
+  input[type="checkbox"].switch:hover ~ .ui-element,
+  input[type="checkbox"].switch:focus ~ .ui-element {
+    border-color: #014c8c;
+  }
+  input[type="radio"].flat:checked ~ .ui-element:before, input[type="radio"].switch:checked ~ .ui-element:before,
+  input[type="checkbox"].flat:checked ~ .ui-element:before,
+  input[type="checkbox"].switch:checked ~ .ui-element:before {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-top: 0.125rem;
+    margin-left: 0.125rem;
+  }
+  input[type="radio"].flat.round ~ .ui-element,
+  input[type="radio"].flat.round ~ .ui-element:before, input[type="radio"].switch.round ~ .ui-element,
+  input[type="radio"].switch.round ~ .ui-element:before,
+  input[type="checkbox"].flat.round ~ .ui-element,
+  input[type="checkbox"].flat.round ~ .ui-element:before,
+  input[type="checkbox"].switch.round ~ .ui-element,
+  input[type="checkbox"].switch.round ~ .ui-element:before {
+    border-radius: 100%;
+  }
+}

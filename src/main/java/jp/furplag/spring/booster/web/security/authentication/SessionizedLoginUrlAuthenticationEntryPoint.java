@@ -17,36 +17,17 @@ package jp.furplag.spring.booster.web.security.authentication;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
-import jp.furplag.util.commons.StringUtils;
-import lombok.Getter;
-import lombok.Setter;
-
-@ConfigurationProperties("webstarter.security")
 public class SessionizedLoginUrlAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
-  @Getter
-  @Setter
-  private String loginUrl;
-
-  @Getter
-  @Setter
-  private String loginFailureUrl;
-
-  @Getter
-  @Setter
-  private String logoutUrl;
-
-  @Getter
-  @Setter
+  @Value("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.timeout-url:}', '/error/timeout')}")
   private String timeoutUrl;
 
   /**
@@ -57,20 +38,6 @@ public class SessionizedLoginUrlAuthenticationEntryPoint extends LoginUrlAuthent
    */
   public SessionizedLoginUrlAuthenticationEntryPoint(String loginFormUrl) {
     super(loginFormUrl);
-  }
-
-  @PostConstruct
-  public void init() {
-    loginUrl = StringUtils.defaultString(loginUrl, "/login");
-    if (StringUtils.isBlank(loginFailureUrl)) {
-      loginFailureUrl = loginUrl + (loginUrl.contains("?") ? "&" : "?") + "error";
-    }
-    if (StringUtils.isBlank(logoutUrl)) {
-      logoutUrl = loginUrl + (loginUrl.contains("?") ? "&" : "?") + "logout";
-    }
-    if (StringUtils.isBlank(timeoutUrl)) {
-      timeoutUrl = loginUrl + (loginUrl.contains("?") ? "&" : "?") + "timeout";
-    }
   }
 
   /**

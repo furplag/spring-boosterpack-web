@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import is.tagomor.woothee.Classifier;
 import jp.furplag.util.commons.StringUtils;
@@ -17,6 +19,10 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 public class Wootheed implements Serializable {
+
+  private static final long serialVersionUID = 1L;
+
+  private static final Logger logger = LoggerFactory.getLogger(Wootheed.class);
 
   private final String category;
   private final String name;
@@ -45,9 +51,9 @@ public class Wootheed implements Serializable {
     this.ie = "internetexplorer".equalsIgnoreCase(name);
     this.versionNumber = versionNumber(version);
     this.osVersionNumber = versionNumber(osVersion);
-    this.outdated = !crawler && isObsolute();
-    System.out.println(this.toString());
+    this.outdated = !crawler && isObsolete();
 
+    logger.debug(ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE));
   }
 
   /**
@@ -66,21 +72,25 @@ public class Wootheed implements Serializable {
   /**
    * lazy browser detection for presentation.
    *
-   * @return isObsolute returns true if outdated browser.
+   * @return isObsolete returns true if outdated browser.
    */
-  private final boolean isObsolute() {
+  private final boolean isObsolete() {
     if (crawler) return false;
     if (ie && versionNumber < 9) return true;
+    if (name.contains("edge") && versionNumber < 12) return true;
     if (name.contains("firefox") && versionNumber < 38) return true;
-    if (name.contains("chrome") && versionNumber < 38) return true;
-    if (name.contains("safari") && os.contains("windows") && versionNumber < 6) return true;
-    if (name.contains("safari") && os.contains("windows") && versionNumber < 6) return true;
+    if (name.contains("chrome") && versionNumber < 35) return true;
+    if (name.contains("safari") && versionNumber < 8) return true;
+    if (name.contains("opera") && versionNumber < 12) return true;
+    if (name.contains("vivaldi") && versionNumber < 1) return true;
+    if (name.contains("android") && versionNumber < 4.44) return true;
+    if (userAgent.contains("opera mini")) return true;
 
     return false;
   }
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
   }
 }

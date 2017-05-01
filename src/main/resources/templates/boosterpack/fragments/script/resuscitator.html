@@ -1,0 +1,15 @@
+<!doctype html>
+<html class="no-js"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  lang="en">
+<head></head>
+<body>
+<section th:fragment="default" th:if="activate=${@environment.getProperty('webstarter.security.session-resuscitate')?:false}" th:with="timeout=${#httpSession.maxInactiveInterval?:0}">
+<script sec:authorize="isAuthenticated()" th:if="${(#httpSession.maxInactiveInterval?:0)>0}" th:inline="javascript">
++function ($) {'use strict';$(function () {var sessionTimeout =~~([[${#httpSession.maxInactiveInterval?:0}]]);var interval = ~~(sessionTimeout * 900);if (sessionTimeout > 9) {resuscitator = setInterval(function () {$.get({url: [[@{/resuscitate}]], timeout: 1000}, {}, function () {})}, interval);}});}(jQuery);
+</script>
+</section>
+</body>
+</html>

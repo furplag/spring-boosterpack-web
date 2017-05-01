@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="boosterpack/layouts/default"
+  th:with="lang=${#locale.language},site=${@environment.getProperty('server.display-name')?:@environment.getProperty('server.context-path')?:'app'}"
+  th:lang="${lang}">
+<head>
+<title th:text="${#messages.msgOrNull('page.title.index')?:'index'}"></title>
+</head>
+<body>
+  <div layout:fragment="content">
+    <div class="row">
+      <div class="col col-xs-10 col-xs-offset-1">
+        <h1 th:text="|${#strings.capitalize(site)}|"></h1>
+        <p th:inline="text">This page presented by &quot;spring-boosterpack-web&quot;.</p>
+        <h2>Feature</h2>
+        <p>sticky header &amp; footer.</p>
+        <p>login &amp; logout ready.</p>
+        <p>Immotal session.</p>
+      </div>
+    </div>
+  </div>
+
+  <section layout:fragment="script">
+    <script>
+/*
+    $(function(){alert($('#check0').outerWidth(true))});
+*/
+    </script>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+# Configration defaults in boosterpack-web.
+boosterpack:
+  web:
+    mvc:
+      locale-change-http-methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+      locale-change-ignore-invalid: true
+      locale-change-param-name: locale
+      validation-message-prefix: #none
+      woothee-enabled: true
+      woothee-attribute-name: ua
+
+    security:
+      gateway-enabled: true
+      login-url: /login
+      login-failure-url: /error/unauthorized
+      login-success-url:  /dashboard
+      logout-url: /logout
+      logout-success-url: /quit 
+      timeout-url: /error/timeout
+      session-resuscitate: true
+      allowed-anonymous: 
+      - /
+      - /index
+      - /error
+      - /error/**
+      - /login
+      - /quit
+      - /resuscitate
+
+    i18n:
+      default-locale-name: ja
+      default-zone-id: JST

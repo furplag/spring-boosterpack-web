@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="no-js lte-ie9"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  th:with="lang=${#locale.language},site=${@environment.getProperty('server.display-name')?:@environment.getProperty('server.context-path')?:'app'}"
+  th:lang="${lang}">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<noscript>
+  <meta http-equiv="refresh" th:attr="content=|0; URL=@{/error/noscript}|" />
+</noscript>
+<title th:text="|${#strings.toUpperCase(site)} - Error|"></title>
+<script th:src="@{/webjars/modernizr/modernizr.min.js}"></script>
+<link rel="stylesheet" th:href="@{/boosterpack/libs/css/bootstrap-3x.min.css}" />
+<link rel="stylesheet" th:href="@{/boosterpack/css/boosterpack.css}" />
+<link rel="stylesheet" th:href="@{|/css/${site}.css|}" />
+</head>
+<body>
+  <main>
+  <div class="container">
+    <div class="row">
+      <h1 th:text="${#strings.toUpperCase(site)}"></h1>
+      <div id="mainContent" class="col-xs-12 content">
+        <h2>Could not display normally.</h2>
+        <h3>Browser support</h3>
+        <ul>
+          <li>Microsoft Internet Explorer 9 or later.</li>
+          <li>Microsoft Edge ver.14 or later.</li>
+          <li>Mozzila Firefox ver.38 or later.</li>
+          <li>Google Chrome ver.38 or later.</li>
+          <li>Apple Safari ver.7.1 or later.</li>
+          <li>Opera ver.7.1 or later.</li>
+          <li>Opera mini does not supported.</li>
+          <li>Safari for Windows does not supported.</li>
+        </ul>
+        <h4>Other requirements</h4>
+        <ul>
+          <li>Google Chrome frame does not supported.</li>
+          <li>Android browser 4.4.4 or later.</li>
+        </ul>
+        <h3>Resolution</h3>
+        <p>Update your browser version, if you could.</p>
+        <p>Install currently web browser, if you could. </p>
+        <h4>See more information at <a th:href="|@{http://outdatedbrowser.com/}${#locale.language}|" target="_blank">outdatedbrowser.com</a>.</h4>
+      </div>
+    </div>
+    <div class="row" style="padding-top: 1em;">
+      <a th:href="@{/}">return to Top.</a>
+    </div>
+  </div>
+  </main>
+  <div class="invisible outer-world">
+    <script th:src="@{/boosterpack/libs/js/jquery-1x.min.js}"></script>
+    <script th:src="@{/boosterpack/libs/js/bootstrap-3x.min.js}"></script>
+    <script th:src="@{/boosterpack/js/boosterpack.js}"></script>
+  </div>
+</body>
+</html>

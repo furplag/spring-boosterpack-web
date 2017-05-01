@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html class="no-js"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  th:with="lang=${#locale.language},site=${@environment.getProperty('server.display-name')?:@environment.getProperty('server.context-path')?:'app'}"
+  th:lang="${lang}">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=1" />
+<title th:text="|${#strings.toUpperCase(site)} - Error|"></title>
+<link rel="stylesheet" th:href="@{/boosterpack/libs/css/bootstrap-3x.min.css}" />
+<link rel="stylesheet" th:href="@{/boosterpack/css/boosterpack.css}" />
+<link rel="stylesheet" th:href="@{|/css/${site}.css|}" />
+</head>
+<body>
+  <main>
+  <div class="container">
+    <div class="row">
+      <h1 th:text="${#strings.toUpperCase(site)}"></h1>
+      <div id="mainContent" class="col-xs-12 content">
+        <h2>Could not display normally.</h2>
+        <p>This application depends to Javascript.</p>
+        <h3>Resolution</h3>
+        <ul>
+          <li>
+            <p>Check "Enable Javascript" on your browser.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row" style="padding-top: 1em;">
+      <a th:href="@{/}">return to Top.</a>
+    </div>
+  </div>
+  </main>
+</body>
+</html>

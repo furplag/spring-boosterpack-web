@@ -1,0 +1,151 @@
+@font-face {
+  font-family: 'FontAwesomeBoosterpack';
+  src:
+    url('../fonts/font-awesome-boosterpack.ttf') format('truetype'),
+    url('../fonts/font-awesome-boosterpack.woff') format('woff'),
+    url('../fonts/font-awesome-boosterpack.svg#FontAwesomeBoosterpack') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fa.fa-android,
+.fa.fa-apple,
+.fa.fa-behance,
+.fa.fa-bug,
+.fa.fa-chrome,
+.fa.fa-cog,
+.fa.fa-device-lg,
+.fa.fa-device-sm,
+.fa.fa-device-xl,
+.fa.fa-device-xs,
+.fa.fa-edge,
+.fa.fa-equalizer,
+.fa.fa-facebook,
+.fa.fa-finder,
+.fa.fa-firefox,
+.fa.fa-github,
+.fa.fa-google,
+.fa.fa-ie,
+.fa.fa-ios,
+.fa.fa-ipad,
+.fa.fa-iphone,
+.fa.fa-key,
+.fa.fa-linux,
+.fa.fa-mac,
+.fa.fa-macos,
+.fa.fa-macosx,
+.fa.fa-opera,
+.fa.fa-safari,
+.fa.fa-tux,
+.fa.fa-tv,
+.fa.fa-twitter,
+.fa.fa-vivaldi,
+.fa.fa-windows,
+.fa.fa-windows10,
+.fa.fa-windows7,
+.fa.fa-windows8,
+.fa.fa-windowsphoneos,
+.fa.fa-yahoo {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesomeBoosterpack;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-android:before {
+  content: "\eac0";
+}
+.fa-apple:before,
+.fa-ios:before,
+.fa-iphone:before,
+.fa-ipad:before {
+  content: "\eabe";
+}
+.fa-behance:before {
+  content: "\eaa8";
+}
+.fa-bug:before {
+  content: "\e999";
+}
+.fa-chrome:before {
+  content: "\ead9";
+}
+.fa-cog:before {
+  content: "\e994";
+}
+.fa-device-lg:before {
+  content: "\e957";
+}
+.fa-device-sm:before {
+  content: "\e95a";
+}
+.fa-device-xl:before {
+  content: "\e956";
+}
+.fa-device-xs:before {
+  content: "\e959";
+}
+.fa-edge:before {
+  content: "\eadc";
+}
+.fa-equalizer:before {
+  content: "\e993";
+}
+.fa-facebook:before {
+  content: "\ea90";
+}
+.fa-finder:before,
+.fa-mac:before,
+.fa-macos:before,
+.fa-macosx:before {
+  content: "\eabf";
+}
+.fa-firefox:before {
+  content: "\eada";
+}
+.fa-github:before {
+  content: "\eab0";
+}
+.fa-google:before {
+  content: "\ea88";
+}
+.fa-ie:before {
+  content: "\eadb";
+}
+.fa-key:before {
+  content: "\e98e";
+}
+.fa-opera:before {
+  content: "\eade";
+}
+.fa-safari:before {
+  content: "\eadd";
+}
+.fa-tux:before,
+.fa-linux:before {
+  content: "\eabd";
+}
+.fa-tv:before {
+  content: "\e95b";
+}
+.fa-twitter:before {
+  content: "\ea96";
+}
+.fa-vivaldi:before {
+  content: "\e800";
+}
+.fa-windows:before,
+.fa-windows7:before {
+  content: "\eac1";
+}
+
+.fa-windows10:before,
+.fa-windows8:before,
+.fa-windowsphoneos:before {
+  content: "\eac2";
+}
+.fa-yahoo:before {
+  content: "\eabb";
+}

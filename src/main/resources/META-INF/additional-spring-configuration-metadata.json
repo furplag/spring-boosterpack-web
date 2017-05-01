@@ -2,70 +2,106 @@
   "groups": [],
   "properties": [
     {
-      "name": "webstarter.mvc.locale-change-http-methods",
+      "name": "boosterpack.web.i18n.default-locale-name",
+      "type": "java.lang.String",
+      "description": "Fixed Locale that the resolver will return if no cookie found.",
+      "defaultValue": "\"\" ( Locale.ROOT ) "
+    },
+    {
+      "name": "boosterpack.web.i18n.default-zone-id",
+      "type": "java.lang.String",
+      "description": "The Time Zone ID that application's dafault.",
+      "defaultValue": "System default"
+    },
+    {
+      "name": "boosterpack.web.mvc.locale-change-http-methods",
       "type": "java.util.List<java.lang.String>",
       "description": "The HTTP method(s) over which the locale can be changed.",
       "defaultValue": "\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\""
     },
     {
-      "name": "webstarter.mvc.locale-change-ignore-invalid",
+      "name": "boosterpack.web.mvc.locale-change-ignore-invalid",
       "type": "java.lang.Boolean",
       "description": "Whether to ignore an invalid value for the locale parameter.",
       "defaultValue": true
     },
     {
-      "name": "webstarter.mvc.locale-change-param-name",
+      "name": "boosterpack.web.mvc.locale-change-param-name",
       "type": "java.lang.String",
       "description": "The name of the parameter that contains a locale specification in a locale change request.",
-      "defaultValue": "locale"
+      "defaultValue": "\"locale\""
     },
     {
-      "name": "webstarter.mvc.validation-message-prefix",
+      "name": "boosterpack.web.mvc.validation-message-prefix",
       "type": "java.lang.String",
       "description": "message resource key prefix ( e.g. \"validation.\" ) .",
       "defaultValue": "\"\""
     },
     {
-      "name": "webstarter.security.login-url",
+      "name": "boosterpack.web.mvc.woothee-attribute-name",
+      "type": "java.lang.String",
+      "description": "Classified User-Agent's object key.",
+      "defaultValue": "\"ua\""
+    },
+    {
+      "name": "boosterpack.web.mvc.woothee-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable using Woothee in views.",
+      "defaultValue": true
+    },
+    {
+      "name": "boosterpack.web.security.gateway-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable to access \"\/\" anonymously.",
+      "defaultValue": true
+    },
+    {
+      "name": "boosterpack.web.security.login-url",
       "type": "java.lang.String",
       "description": "The URL to send users to if login is required.",
-      "defaultValue": "/login"
+      "defaultValue": "\/login"
     },
     {
-      "name": "webstarter.security.login-success-url",
-      "type": "java.lang.String",
-      "description": "Specifies where users will go after authenticating successfully if they have not visited a secured page prior to authenticating.",
-      "defaultValue": "/"
-    },
-    {
-      "name": "webstarter.security.login-failure-url",
+      "name": "boosterpack.web.security.login-failure-url",
       "type": "java.lang.String",
       "description": "The URL to send users if authentication fails.",
-      "defaultValue": "/login?error"
+      "defaultValue": "\/error\/unauthorized"
     },
     {
-      "name": "webstarter.security.logout-url",
+      "name": "boosterpack.web.security.login-success-url",
+      "type": "java.lang.String",
+      "description": "Specifies where users will go after authenticating successfully if they have not visited a secured page prior to authenticating.",
+      "defaultValue": "\/dashboard"
+    },
+    {
+      "name": "boosterpack.web.security.logout-url",
       "type": "java.lang.String",
       "description": "The URL that triggers log out to occur.",
-      "defaultValue": "/logout"
+      "defaultValue": "\/logout"
     },
     {
-      "name": "webstarter.security.logout-success-url",
+      "name": "boosterpack.web.security.logout-success-url",
       "type": "java.lang.String",
       "description": "The URL to redirect to after logout has occurred.",
-      "defaultValue": "/"
+      "defaultValue": "\/quit"
     },
     {
-      "name": "webstarter.security.timeout-url",
+      "name": "boosterpack.web.security.session-resuscitate",
+      "type": "java.lang.Boolean",
+      "description": "Enable session resuscitates.",
+      "defaultValue": false
+    },
+    {
+      "name": "boosterpack.web.security.timeout-url",
       "type": "java.lang.String",
       "description": "The URL to redirect to send users if session timeout.",
-      "defaultValue": "/login?timeout"
+      "defaultValue": "\/error\/timeout"
     },
     {
-      "name": "webstarter.security.ignored",
+      "name": "boosterpack.web.security.allowed-anonymous",
       "type": "java.util.List<java.lang.String>",
       "description": "Comma-separated list of paths to exclude from the default secured paths.",
-      "defaultValue": "\"webstarter.security.login-url\",\n\"webstarter.security.login-failure-url\",\n\"webstarter.security.logout-url\",\n\"webstarter.security.timeout-url\""
+      "defaultValue": "Accessable pages anonymously. (\/login, \/timeout, etc.) "
     }
   ]
 }
