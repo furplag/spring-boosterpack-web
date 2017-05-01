@@ -1,2 +1,4 @@
 src/main/resources/static/boosterpack/libs/**
 src/main/resources/static/boosterpack/misc/**
+bower_components
+node_modules

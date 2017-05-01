@@ -19,8 +19,8 @@
   <url>https://github.com/furplag/${project.name}</url>
 
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>jp.furplag.spring.boot</groupId>
+    <artifactId>spring-boosterpack-parent</artifactId>
     <version>1.5.2.RELEASE</version>
     <relativePath />
     <!-- lookup parent from repository -->
@@ -82,12 +82,10 @@
     <dependency>
       <groupId>is.tagomor.woothee</groupId>
       <artifactId>woothee-java</artifactId>
-      <version>1.5.1</version>
     </dependency>
     <dependency>
       <groupId>jp.furplag.sandbox.java.util</groupId>
       <artifactId>commons-wrap</artifactId>
-      <version>2.0.0</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -97,7 +95,6 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
-      <version>1.10.19</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -156,7 +153,6 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
-      <version>4.0.0-alpha.6</version>
       <exclusions>
         <exclusion>
           <groupId>org.webjars</groupId>
@@ -167,27 +163,22 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap-datepicker</artifactId>
-      <version>1.6.4</version>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap-notify</artifactId>
-      <version>3.1.3</version>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>font-awesome</artifactId>
-      <version>4.7.0</version>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>jquery</artifactId>
-      <version>3.1.1-1</version>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>tether</artifactId>
-      <version>1.4.0</version>
     </dependency>
   </dependencies>
 

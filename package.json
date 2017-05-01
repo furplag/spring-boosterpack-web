@@ -1,6 +1,6 @@
 {
   "name": "spring-boosterpack-web",
-  "version": "1.5.1-SNAPSHOT",
+  "version": "1.5.2.RELEASE",
   "description": "usual configuration for Spring Boot webapp (war) faster, easier.",
   "keywords": [
     "bootstrap",
