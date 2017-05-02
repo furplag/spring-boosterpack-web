@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016+ furplag (https://github.com/furplag/)
+ * Copyright (C) 2016+ furplag (https://github.com/furplag)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,6 +94,10 @@ public abstract class WebSecurityConfiguration extends WebSecurityConfigurerAdap
   @Setter
   private List<String> allowedAnonymous = new ArrayList<>();
 
+  @Getter
+  @Setter
+  private Boolean sessionResuscitate = false;
+
   @PostConstruct
   public void init() {
     if (allowedAnonymous == null) allowedAnonymous = new ArrayList<>();
@@ -109,6 +113,7 @@ public abstract class WebSecurityConfiguration extends WebSecurityConfigurerAdap
     if (gatewayEnabled) allowedAnonymous.addAll(Arrays.asList("/", "/index"));
     allowedAnonymous.addAll(Arrays.asList(loginUrl, loginFailureUrl, logoutUrl, logoutSuccessUrl, timeoutUrl, "/error/**", "/resuscitate"));
     allowedAnonymous = allowedAnonymous.stream().sorted(Comparator.naturalOrder()).distinct().collect(Collectors.toList());
+    sessionResuscitate = sessionResuscitate != null || sessionResuscitate;
 
     logger.debug("  Boosterpack\n-----\n{}-----", ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE));
   }

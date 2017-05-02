@@ -110,7 +110,6 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -224,6 +223,7 @@
             <contact>${developer.url}</contact>
           </properties>
           <includes>
+            <exclude>src/main/java/**</exclude>
             <include>bower.json</include>
             <include>package.json</include>
           </includes>
