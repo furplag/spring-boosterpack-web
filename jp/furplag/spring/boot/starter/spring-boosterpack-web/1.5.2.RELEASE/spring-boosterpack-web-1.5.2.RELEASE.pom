@@ -67,6 +67,16 @@
         <updatePolicy>always</updatePolicy>
       </snapshots>
     </repository>
+
+    <repository>
+      <id>jp.furplag.sandbox.spring-boosterpack-parent</id>
+      <url>https://raw.github.com/furplag/spring-boosterpack-parent/mvn-repo/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+
     <repository>
       <id>jp.furplag.spring.boot.starter.spring-boosterpack-validation</id>
       <url>https://raw.github.com/furplag/spring-boosterpack-validation/mvn-repo/</url>
@@ -100,7 +110,6 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -214,6 +223,7 @@
             <contact>${developer.url}</contact>
           </properties>
           <includes>
+            <exclude>src/main/java/**</exclude>
             <include>bower.json</include>
             <include>package.json</include>
           </includes>
