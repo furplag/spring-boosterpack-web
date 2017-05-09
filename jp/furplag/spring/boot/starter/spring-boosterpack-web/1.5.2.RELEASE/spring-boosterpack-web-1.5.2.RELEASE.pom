@@ -161,13 +161,11 @@
     <dependency>
       <groupId>org.thymeleaf.extras</groupId>
       <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>webjars-locator</artifactId>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
@@ -203,6 +201,7 @@
 
   <build>
     <plugins>
+
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
@@ -215,6 +214,7 @@
               <url>${project.url}</url>
             </manifestEntries>
           </archive>
+
         </configuration>
       </plugin>
       <plugin>
