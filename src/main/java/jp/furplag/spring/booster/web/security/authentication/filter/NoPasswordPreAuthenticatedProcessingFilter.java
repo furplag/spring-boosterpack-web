@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import org.springframework.util.Assert;
 
-import jp.furplag.util.commons.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

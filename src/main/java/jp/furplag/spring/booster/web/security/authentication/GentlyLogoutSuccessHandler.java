@@ -44,12 +44,12 @@ public class GentlyLogoutSuccessHandler implements LogoutSuccessHandler {
 
   private static final Logger logger = LoggerFactory.getLogger(GentlyLogoutSuccessHandler.class);
 
-  @Value("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.logout-success-url:}', '/quit')}")
+  @Value("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.logout-success-url:}', '/quit')}")
   @Getter
   @Setter
   private String logoutSuccessUrl;
 
-  @Value("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.mvc.locale-change-param-name:}', 'locale')}")
+  @Value("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.mvc.locale-change-param-name:}', 'locale')}")
   @Getter
   @Setter
   private String localeChangeParamName;

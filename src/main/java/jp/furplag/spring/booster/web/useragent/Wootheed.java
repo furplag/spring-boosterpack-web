@@ -18,8 +18,10 @@ package jp.furplag.spring.booster.web.useragent;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -27,7 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import is.tagomor.woothee.Classifier;
-import jp.furplag.util.commons.StringUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -56,12 +57,12 @@ public class Wootheed implements Serializable {
   public Wootheed(String userAgent) {
     this.userAgent = StringUtils.defaultString(userAgent);
     Map<String, String> classified = Classifier.parse(this.userAgent);
-    this.category = StringUtils.flatten(classified.getOrDefault("category", "unknown"));
-    this.name = StringUtils.flatten(classified.getOrDefault("name", "unknown"));
-    this.version = StringUtils.flatten(classified.getOrDefault("version", "unknown"));
-    this.os = StringUtils.flatten(classified.getOrDefault("os", "unknown"));
-    this.vendor = StringUtils.flatten(classified.getOrDefault("vendor", "unknown"));
-    this.osVersion = StringUtils.flatten(classified.getOrDefault("os_version", "unknown"));
+    this.category = Objects.toString(classified.getOrDefault("category", "unknown"), "unknown").toLowerCase().replaceAll("\\s", "");
+    this.name = Objects.toString(classified.getOrDefault("name", "unknown"), "unknown").toLowerCase().replaceAll("\\s", "");
+    this.version = Objects.toString(classified.getOrDefault("version", "unknown"), "unknown").toLowerCase().replaceAll("\\s", "");
+    this.os = Objects.toString(classified.getOrDefault("os", "unknown"), "unknown").toLowerCase().replaceAll("\\s", "");
+    this.vendor = Objects.toString(classified.getOrDefault("vendor", "unknown"), "unknown").toLowerCase().replaceAll("\\s", "");
+    this.osVersion = Objects.toString(classified.getOrDefault("os_version", "unknown"), "unknown").toLowerCase().replaceAll("\\s", "");
     this.crawler = "crawler".equalsIgnoreCase(category);
     this.ie = "internetexplorer".equalsIgnoreCase(name);
     this.versionNumber = versionNumber(version);

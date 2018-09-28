@@ -27,6 +27,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
@@ -53,7 +54,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import jp.furplag.spring.booster.web.security.authentication.GentlyLogoutSuccessHandler;
 import jp.furplag.spring.booster.web.security.authentication.SessionizedLoginUrlAuthenticationEntryPoint;
 import jp.furplag.spring.booster.web.security.filter.CsrfHeaderFilter;
-import jp.furplag.util.commons.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
 

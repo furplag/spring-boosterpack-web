@@ -40,13 +40,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 public abstract class BaseController {
 
-  @Value("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-url:}', '/login')}")
+  @Value("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-url:}', '/login')}")
   private String loginUrl;
 
-  @Value("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-success-url:}', '/')}")
+  @Value("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-success-url:}', '/')}")
   private String loginSuccessUrl;
 
-  @Value("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${server.error.path:}', '/error')}")
+  @Value("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${server.error.path:}', '/error')}")
   private String errorPath;
 
   @Autowired
@@ -73,7 +73,7 @@ public abstract class BaseController {
    * @param model {@link Model}
    * @return modelAndView {@link org.springframework.web.servlet.ModelAndView ModelAndView}
    */
-  @GetMapping("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-url:}', '/login')}")
+  @GetMapping("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-url:}', '/login')}")
   public String login(HttpServletRequest request, Principal principal, Model model) {
     if (principal != null && !request.isUserInRole("ROLE_ANONYMOUS")) return "redirect:" + loginSuccessUrl;
 
@@ -88,7 +88,7 @@ public abstract class BaseController {
    * @param model {@link Model}
    * @return modelAndView {@link org.springframework.web.servlet.ModelAndView ModelAndView}
    */
-  @RequestMapping("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-success-url:}', '/dashboard')}")
+  @RequestMapping("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-success-url:}', '/dashboard')}")
   public String dashboard(HttpServletRequest request, Principal principal, Model model) {
     return "boosterpack/index";
   }
@@ -101,7 +101,7 @@ public abstract class BaseController {
    * @param model {@link Model}
    * @return modelAndView {@link org.springframework.web.servlet.ModelAndView ModelAndView}
    */
-  @GetMapping("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.logout-success-url:}', '/quit')}")
+  @GetMapping("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.logout-success-url:}', '/quit')}")
   public String logout(HttpServletRequest request, Principal principal, RedirectAttributes attributes) {
     attributes.addFlashAttribute("notificationType", "info");
     attributes.addFlashAttribute("notificationMessage", messageSource.getMessage("message.logout", null, "sign out successfully.", LocaleContextHolder.getLocale()));
@@ -117,7 +117,7 @@ public abstract class BaseController {
    * @param model {@link Model}
    * @return json: {"result": true, "message": "sign out successfully."}
    */
-  @GetMapping("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.logout-success-url:}', '/quit')}quietly")
+  @GetMapping("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.logout-success-url:}', '/quit')}quietly")
   @ResponseBody
   public Map<?, ?> logoutQuietly(HttpServletRequest request, HttpServletResponse response, Principal principal) {
     Map<String, Object> responseBody = new HashMap<>();
@@ -144,7 +144,7 @@ public abstract class BaseController {
     return responseBody;
   }
 
-  @RequestMapping({"#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-failure-url:}', '/error/unauthorized')}"})
+  @RequestMapping({"#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.login-failure-url:}', '/error/unauthorized')}"})
   public String unauthrized(RedirectAttributes attributes) {
     attributes.addFlashAttribute("unauthorized", true);
 //    attributes.addFlashAttribute("notificationType", "danger");
@@ -161,7 +161,7 @@ public abstract class BaseController {
    * @param model {@link Model}
    * @return modelAndView {@link org.springframework.web.servlet.ModelAndView ModelAndView}
    */
-  @RequestMapping({"#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.timeout-url:}', '/error/timeout')}"})
+  @RequestMapping({"#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.timeout-url:}', '/error/timeout')}"})
   public String timeout(HttpServletRequest request, Principal principal, RedirectAttributes attributes) {
     if (principal != null && !request.isUserInRole("ROLE_ANONYMOUS")) return "redirect:" + loginSuccessUrl;
     attributes.addFlashAttribute("timeout", true);

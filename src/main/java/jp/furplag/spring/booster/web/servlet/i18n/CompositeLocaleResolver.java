@@ -22,14 +22,13 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-import jp.furplag.util.Localizer;
-import jp.furplag.util.commons.StringUtils;
 import lombok.Setter;
 
 /**
@@ -63,8 +62,8 @@ public class CompositeLocaleResolver extends CookieLocaleResolver {
 
   @PostConstruct
   private void init() {
-    Locale dafaultLocale = Localizer.getAvailableLocale(StringUtils.defaultString(defaultLocaleName, ""));
-    TimeZone defaultTimeZone = TimeZone.getTimeZone(Localizer.getZoneId(StringUtils.defaultIfEmpty(defaultZoneId, null)));
+    Locale dafaultLocale = new Locale(StringUtils.defaultString(defaultLocaleName, "ROOT"));
+    TimeZone defaultTimeZone = StringUtils.isNotBlank(defaultZoneId) ? TimeZone.getTimeZone(defaultZoneId) : TimeZone.getDefault();
     logger.debug("\n  Boosterpack:\n    Initialize {Locale: {}, TimeZone: {}}", StringUtils.defaultIfEmpty(dafaultLocale.getDisplayName(), "ROOT"), defaultTimeZone.getDisplayName());
 
     setDefaultLocale(dafaultLocale);

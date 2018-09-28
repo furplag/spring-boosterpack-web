@@ -23,10 +23,11 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ErrorViewResolver;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolver;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -58,7 +59,6 @@ import jp.furplag.spring.booster.web.handler.interceptor.UserAgentRequestInterce
 import jp.furplag.spring.booster.web.handler.interceptor.UserAgentWebRequestInterceptor;
 import jp.furplag.spring.booster.web.handler.resolver.UserAgentMethodArgumentResolver;
 import jp.furplag.spring.booster.web.servlet.i18n.CompositeLocaleResolver;
-import jp.furplag.util.commons.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -354,8 +354,7 @@ public abstract class WebMvcConfigurerAdapter implements WebMvcConfigurer {
   /**
    * {@inheritDoc}
    *
-   * @see {@link jp.furplag.spring.boot.starter.webstarter.config.WebMvcConfigurerAdapter#validator()
-   *      validator()}
+   * @see #validator()
    */
   @Override
   public Validator getValidator() {
@@ -365,8 +364,7 @@ public abstract class WebMvcConfigurerAdapter implements WebMvcConfigurer {
   /**
    * {@inheritDoc}
    *
-   * @see {@link jp.furplag.spring.boot.starter.webstarter.config.WebMvcConfigurerAdapter#messageCodesResolver()
-   *      messageCodesResolver()}
+   * @see #messageCodesResolver()
    */
   @Override
   public MessageCodesResolver getMessageCodesResolver() {

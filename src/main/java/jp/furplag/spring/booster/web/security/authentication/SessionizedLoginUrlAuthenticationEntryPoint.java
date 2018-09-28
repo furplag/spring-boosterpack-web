@@ -27,7 +27,7 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 
 public class SessionizedLoginUrlAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
-  @Value("#{T(jp.furplag.util.commons.StringUtils).defaultIfEmpty('${boosterpack.web.security.timeout-url:}', '/error/timeout')}")
+  @Value("#{T(org.apache.commons.lang3.StringUtils).defaultIfEmpty('${boosterpack.web.security.timeout-url:}', '/error/timeout')}")
   private String timeoutUrl;
 
   /**
